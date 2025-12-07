@@ -7,12 +7,12 @@ jobs:
   job1:
     runs-on: ubuntu-latest
     outputs:
-      my_value: ${{ steps.step1.outputs.value }}
+      my_value: ${{ steps.set_output.outputs.my_value }}
     steps:
-      - id: step1
-        run: echo "value=99" >> $GITHUB_OUTPUT
+      - id: set_output
+        run: echo "my_value=99" >> $GITHUB_OUTPUT
       - name: Show Step Output
-        run: echo "Job1 step output: ${{ steps.step1.outputs.value }}"
+        run: echo "Job1 step output: ${{ steps.set_output.outputs.my_value }}"
 
   job2:
     runs-on: ubuntu-latest
