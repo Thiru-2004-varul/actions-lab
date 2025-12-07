@@ -11,6 +11,7 @@ jobs:
     steps:
       - id: step1
         run: echo "value=99" >> $GITHUB_OUTPUT
+
       - name: Show Step Output
         run: echo "Job1 step output: ${{ steps.step1.outputs.value }}"
 
@@ -20,4 +21,3 @@ jobs:
     steps:
       - name: Show Job Output
         run: echo "Job2 received output from Job1: ${{ needs.job1.outputs.my_value }}"
-
