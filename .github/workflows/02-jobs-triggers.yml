@@ -1,4 +1,4 @@
-name: 02 – Jobs and Triggers Practice
+name: 02 - Jobs and Triggers Practice
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
 jobs:
 
   job1:
-    name: Job 1 – First Job
+    name: Job 1 - First Job
     runs-on: ubuntu-latest
     steps:
       - name: Show Event
@@ -19,7 +19,7 @@ jobs:
         run: echo "Branch: ${{ github.ref }}"
 
   job2:
-    name: Job 2 – Depends on Job 1
+    name: Job 2 - Depends on Job 1
     runs-on: ubuntu-latest
     needs: job1
     steps:
@@ -27,7 +27,7 @@ jobs:
         run: echo "Job 2 running AFTER Job 1!"
 
   job3:
-    name: Job 3 – Parallel Job
+    name: Job 3 - Parallel Job
     runs-on: ubuntu-latest
     steps:
       - name: Parallel Info
