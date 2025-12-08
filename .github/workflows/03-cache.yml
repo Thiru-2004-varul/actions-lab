@@ -29,9 +29,6 @@ jobs:
           echo "Cached npm directory:"
           ls -la ~/.npm
           
-    steps:
-      - name: checking
-      	run : echo "this is simple testing of jobs ${{date}}"
-      	
+ 
       	
 
