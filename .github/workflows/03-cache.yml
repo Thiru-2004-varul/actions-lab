@@ -1,0 +1,37 @@
+name: Cache Practice
+
+on:
+  workflow_dispatch:
+
+jobs:
+  cache_node_modules:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Restore npm Cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: npm-cache-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            npm-cache-${{ runner.os }}-
+
+      - name: Install Dependencies
+        run: |
+          echo "Installing npm packages..."
+          npm install
+
+      - name: Show Cache Folder
+        run: |
+          echo "Cached npm directory:"
+          ls -la ~/.npm
+          
+    steps:
+      - name: checking
+      	run : echo "this is simple testing of jobs ${{date}}"
+      	
+      	
+
