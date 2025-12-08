@@ -16,7 +16,7 @@ jobs:
 
     steps:
 
-      - name: Step 1 - Print workflow-level env
+      - name: Step 1 -Print workflow-level env
         run: |
           echo "Project Name:$PROJECT"
           echo "Version:$VERSION"
