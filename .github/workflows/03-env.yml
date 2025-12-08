@@ -1,0 +1,38 @@
+name: Environment Variables Practice
+
+on:
+  workflow_dispatch:
+
+env: # Workflow-level environment variables
+  PROJECT: "Env-Learning"
+  VERSION: "v1.0"
+
+jobs:
+  demo-env:
+    runs-on: ubuntu-latest
+
+    env: # Job-level environment variables
+      JOB_VAR: "This is from the job level"
+
+    steps:
+
+      - name: Step 1 - Print workflow-level env
+        run: |
+          echo "Project Name:$PROJECT"
+          echo "Version:$VERSION"
+
+      - name: Step 2 - Print job-level env
+        run: |
+          echo "Job Variable:$JOB_VAR"
+
+      - name: Step 3 - Step-level env
+        env:
+          STEP_VAR: "This is from the step level"
+        run: |
+          echo "Step Variable:$STEP_VAR"
+
+      - name: Step 4 - Using env inside expressions
+        run: |
+          echo "Uppercase Project:${{ env.PROJECT }}"
+          echo "Uppercase Version:${{ env.VERSION }}"
+
