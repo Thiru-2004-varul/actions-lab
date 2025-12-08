@@ -26,9 +26,6 @@ jobs:
 
       - name: Show Cache Folder
         run: |
-          echo "Cached npm directory:"
+          echo "Cached npm directory"
           ls -la ~/.npm
-          
- 
-      	
 
