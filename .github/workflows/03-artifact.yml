@@ -1,0 +1,37 @@
+name: Artifacts Practice
+
+on:
+  workflow_dispatch:
+
+jobs:
+  create_artifact:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Step 1 - Create Output File
+        run: |
+          echo "This file was created at $(date)" > build-info.txt
+          echo "Artifact content generated successfully."
+
+      - name: Step 2 - Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-info            # Artifact name
+          path: build-info.txt        # File to upload
+          retention-days: 3           # Keep it only for 3 days
+
+  use_artifact:
+    runs-on: ubuntu-latest
+    needs: create_artifact
+
+    steps:
+      - name: Step 3 - Download the Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: build-info
+
+      - name: Step 4 - Show Artifact Content
+        run: |
+          echo "Contents of artifact:"
+          cat build-info.txt
+
