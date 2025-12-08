@@ -8,9 +8,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1. Pull the code so package.json is available
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      # 2. Look for existing cache
       - name: Restore npm Cache
         uses: actions/cache@v4
         with:
@@ -19,13 +21,15 @@ jobs:
           restore-keys: |
             npm-cache-${{ runner.os }}-
 
+      # 3. Install packages (uses cache if found)
       - name: Install Dependencies
         run: |
           echo "Installing npm packages..."
           npm install
 
+      # 4. Debug output to see the result
       - name: Show Cache Folder
         run: |
-          echo "Cached npm directory"
+          echo "Cached npm directory contents:"
           ls -la ~/.npm
-
+          echo "Simple testing of job complete at $(date)"
