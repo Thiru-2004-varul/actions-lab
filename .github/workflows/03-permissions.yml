@@ -12,8 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     
     # Override permissions for this job
-    permissions:
-      contents: write
+  
 
     steps:
       - name: Checkout code
