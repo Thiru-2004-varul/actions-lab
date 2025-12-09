@@ -1,0 +1,34 @@
+name: Permissions-Demo
+
+on:
+  workflow_dispatch:
+
+# Default permissions for the workflow (very restricted)
+permissions:
+  contents: read
+
+jobs:
+  test-permissions:
+    runs-on: ubuntu-latest
+    
+    # Override permissions for this job
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create a file
+        run: echo "This file was created by GitHub Actions" > action-output.txt
+
+      - name: Commit file
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add action-output.txt
+          git commit -m "Add file from GitHub Actions"
+
+      - name: Push changes
+        run: git push
+
