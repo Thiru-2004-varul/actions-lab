@@ -1,0 +1,13 @@
+name: "Caller Workflow"
+
+on:
+  workflow_dispatch:
+
+jobs:
+  call-workflow:
+    uses: ./.github/workflows/reusable-ci.yml
+    with:
+      username: Thiru
+    secrets:
+      TOKEN: ${{ secrets.GITHUB_TOKEN }}
+

@@ -17,6 +17,7 @@ runs:
   steps:
     - name: Generate Greeting
       id: greet
+      shell: bash
       run: |
         echo "Hello, ${{ inputs.name }}! Welcome to your first composite action." 
         echo "message=Hello, ${{ inputs.name }}!" >> $GITHUB_OUTPUT
