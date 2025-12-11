@@ -6,23 +6,24 @@ inputs:
   name:
     description: "Your name"
     required: true
-    default: "Thiru G"
+    default: "Thiru"
 
 outputs:
   message:
     description: "Greeting message"
+    value: ${{ steps.greet.outputs.message }}
 
 runs:
   using: "composite"
   steps:
-    - name: Generate Greeting
-      id: greet
+    - id: greet
+      name: Generate Greeting
       shell: bash
       run: |
-        echo "Hello, ${{ inputs.name }}! Welcome to your first composite action." 
         echo "message=Hello, ${{ inputs.name }}!" >> $GITHUB_OUTPUT
 
     - name: Show Greeting
+      shell: bash
       run: |
-        echo "Greeting from action: ${{ steps.greet.outputs.message }}"
+        echo "Greeting from action"
 
