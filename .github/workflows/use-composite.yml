@@ -1,0 +1,22 @@
+name: Use-Composite-Action
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Run Custom Composite Action
+        id: custom_action_run
+        uses: ./.github/actions/hello-thiru
+        with:
+          name: "Arul"
+
+      - name: Print Output Again
+        run: echo "Output again: ${{ steps.custom_action_run.outputs.message }}"
+

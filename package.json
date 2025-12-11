@@ -1,0 +1,23 @@
+{
+  "name": "actions-lab",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Thiru-2004-varul/actions-lab.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Thiru-2004-varul/actions-lab/issues"
+  },
+  "homepage": "https://github.com/Thiru-2004-varul/actions-lab#readme",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}
