@@ -18,5 +18,5 @@ jobs:
           name: "Arul"
 
       - name: Print Output Again
-        run: echo "Output again: ${{ steps.custom_action_run.outputs.message }}"
+        run: echo "Output again:${{ steps.custom_action_run.outputs.message }}"
 
