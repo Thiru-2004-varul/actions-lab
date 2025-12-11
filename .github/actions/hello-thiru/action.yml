@@ -1,0 +1,27 @@
+name: "Hello Thiru Composite Action"
+description: "A simple composite action to greet a user."
+author: "Thiru"
+
+inputs:
+  name:
+    description: "Your name"
+    required: true
+    default: "Thiru G"
+
+outputs:
+  message:
+    description: "Greeting message"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Generate Greeting
+      id: greet
+      run: |
+        echo "Hello, ${{ inputs.name }}! Welcome to your first composite action." 
+        echo "message=Hello, ${{ inputs.name }}!" >> $GITHUB_OUTPUT
+
+    - name: Show Greeting
+      run: |
+        echo "Greeting from action: ${{ steps.greet.outputs.message }}"
+
