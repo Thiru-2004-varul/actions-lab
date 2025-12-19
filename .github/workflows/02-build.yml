@@ -30,7 +30,7 @@ jobs:
       - name: Build project
         run: |
           mkdir dist
-          echo "Build successful at $(date)" > dist/build.txt
+          echo "Build successful $(date)" > dist/build.txt
 
       # 5️⃣ Upload build artifact
       - name: Upload build artifact
