@@ -32,5 +32,5 @@ jobs:
 
       # 5️⃣ Tests (placeholder for now)
       - name: Run tests
-        run: echo "Tests passed"
+        run: exit 1
 
