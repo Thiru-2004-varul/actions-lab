@@ -6,22 +6,30 @@ on:
     types:
       - completed
 
+permissions:
+  actions: read
+  contents: read
+
 jobs:
   deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
 
     steps:
-      - name: Download artifact
+      - name: Download build artifact
         uses: actions/download-artifact@v4
         with:
           name: build-output
           run-id: ${{ github.event.workflow_run.id }}
+          path: dist
 
-      - name: Deploy (common way)
+      - name: Verify artifact
         run: |
-          echo "Deploy started"
-          echo "Files received:"
-          ls -R .
-          echo "Build info:"
-          cat build.txt
+          echo "Artifact contents:"
+          ls -l dist
+          cat dist/build.txt
+
+      - name: Deploy (simulated)
+        run: |
+          echo "🚀 Deploying build..."
 
