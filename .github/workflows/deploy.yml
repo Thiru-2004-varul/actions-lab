@@ -16,15 +16,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Download artifact from the Build workflow run that triggered this
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
           name: build-output
           run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           path: dist
 
-      # 2️⃣ Verify the artifact
       - name: Verify artifact
         run: |
           echo "Listing artifact contents:"
@@ -32,8 +31,6 @@ jobs:
           echo "Build details:"
           cat dist/build.txt
 
-      # 3️⃣ Simulate deployment
       - name: Deploy (simulation)
         run: |
           echo "🚀 Deploying artifact..."
-
