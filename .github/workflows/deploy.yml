@@ -16,20 +16,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Download build artifact
+      # 1️⃣ Download artifact from the Build workflow run that triggered this
+      - name: Download artifact
         uses: actions/download-artifact@v4
         with:
           name: build-output
           run-id: ${{ github.event.workflow_run.id }}
           path: dist
 
+      # 2️⃣ Verify the artifact
       - name: Verify artifact
         run: |
-          echo "Artifact contents:"
-          ls -l dist
+          echo "Listing artifact contents:"
+          ls -R dist
+          echo "Build details:"
           cat dist/build.txt
 
-      - name: Deploy (simulated)
+      # 3️⃣ Simulate deployment
+      - name: Deploy (simulation)
         run: |
-          echo "🚀 Deploying build..."
+          echo "🚀 Deploying artifact..."
 
