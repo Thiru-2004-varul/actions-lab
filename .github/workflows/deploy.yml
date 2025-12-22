@@ -7,8 +7,9 @@ on:
       - completed
 
 permissions:
-  actions: read
-  contents: read
+  actions: write
+  contents: write
+  pull-requests: write
 
 jobs:
   deploy:
@@ -26,11 +27,43 @@ jobs:
 
       - name: Verify artifact
         run: |
-          echo "Listing artifact contents:"
           ls -R dist
-          echo "Build details:"
           cat dist/build.txt
 
       - name: Deploy (simulation)
         run: |
           echo "🚀 Deploying artifact..."
+
+      - name: Label Feature PRs
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const branch = context.payload.workflow_run.head_branch;
+            const prs = context.payload.workflow_run.pull_requests;
+            
+            if (prs.length > 0 && branch.includes("feature")) {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prs[0].number,
+                labels: ["feature"]
+              });
+            }
+
+      - name: Tag Release
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const date = new Date().toISOString().split('T')[0];
+            const tag = `release-${date}`;
+            try {
+              await github.rest.git.createRef({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                ref: `refs/tags/${tag}`,
+                sha: context.payload.workflow_run.head_sha
+              });
+              console.log(`Created release tag:${tag}`);
+            } catch (e) {
+              console.log(`Tag ${tag} might already exist or error occurred:${e.message}`);
+            }
