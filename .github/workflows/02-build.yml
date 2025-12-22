@@ -33,3 +33,10 @@ jobs:
         with:
           name: build-output
           path: dist
+
+      - name: 🐛 Debug context
+        run: |
+          echo "Event name: ${{ github.event_name }}"
+          echo "Branch ref: ${{ github.ref }}"
+          echo "Actor: ${{ github.actor }}"
+          echo "Commit SHA: ${{ github.sha }}"
